@@ -1,0 +1,156 @@
+{% extends "layouts/app.html" %}
+{% load i18n %}
+{% block title %}{% blocktrans with name=target_display %}{{ name }}'s Wishlist{% endblocktrans %}{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto">
+
+  <!-- Header -->
+  <div class="flex items-center justify-between mb-6">
+    <div class="flex items-center gap-3">
+      {% if target_user.avatar %}
+      <img src="{{ target_user.avatar }}" class="w-12 h-12 rounded-full object-cover" alt="">
+      {% else %}
+      <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-semibold text-lg shrink-0">
+        {{ target_user.initials }}
+      </div>
+      {% endif %}
+      <div>
+        <h1 class="text-2xl font-bold text-gray-900">{% blocktrans with name=target_display %}{{ name }}'s Wishlist{% endblocktrans %}</h1>
+      </div>
+    </div>
+    <a href="{% url 'gifts:index' %}" class="btn-secondary text-sm">
+      <i class="fa-solid fa-arrow-left mr-1"></i>{% trans "Back" %}
+    </a>
+  </div>
+
+  <!-- Add Surprise -->
+  <div class="bg-white rounded-xl shadow-sm border border-dashed border-purple-300 mb-6"
+       x-data="{ open: false }">
+    <button @click="open = !open" class="w-full flex items-center justify-between p-4 text-left">
+      <div class="flex items-center gap-2 font-semibold text-purple-700">
+        <i class="fa-solid fa-wand-magic-sparkles text-purple-500"></i>
+        {% trans "Add a surprise gift" %}
+      </div>
+      <i class="fa-solid fa-chevron-down text-purple-300 transition-transform duration-200"
+         :class="open ? 'rotate-180' : ''"></i>
+    </button>
+    <div x-show="open" x-cloak class="border-t border-purple-100 p-4 bg-purple-50 rounded-b-xl">
+      <p class="text-sm text-purple-600 mb-3">
+        <i class="fa-solid fa-eye-slash mr-1"></i>
+        {% blocktrans with name=target_display %}{{ name }} will only see a placeholder — they won't know what it is!{% endblocktrans %}
+      </p>
+      <form method="POST" action="{% url 'gifts:add_surprise' target_user.pk %}">
+        {% csrf_token %}
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Gift name" %} *</label>
+            {{ surprise_form.name }}
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Details" %}</label>
+            {{ surprise_form.description }}
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Link" %}</label>
+            {{ surprise_form.url }}
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Approximate price (€)" %}</label>
+            {{ surprise_form.price }}
+          </div>
+        </div>
+        <div class="mt-3 flex gap-2">
+          <button type="submit"
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium bg-purple-600 text-white hover:bg-purple-700 transition-colors">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>{% trans "Add Surprise" %}
+          </button>
+          <button type="button" @click="open = false" class="btn-secondary">{% trans "Cancel" %}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Gift list -->
+  {% if gifts %}
+  <div class="space-y-3">
+    {% for gift in gifts %}
+    <div class="bg-white rounded-xl shadow-sm border border-gray-200 {% if gift.is_received %}opacity-60{% endif %}">
+      <div class="p-4">
+
+        <!-- Surprise badge -->
+        {% if gift.is_surprise %}
+        <div class="flex items-center gap-1.5 text-xs text-purple-500 mb-2">
+          <i class="fa-solid fa-wand-magic-sparkles"></i>
+          {% if gift.added_by == request.user %}
+          <span>{% trans "Surprise added by you" %}</span>
+          {% else %}
+          <span>{% blocktrans with name=gift.added_by.display_name %}Surprise from {{ name }}{% endblocktrans %}</span>
+          {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="flex items-start gap-3">
+          <!-- Gift info -->
+          <div class="flex-1 min-w-0">
+            <div class="flex items-center flex-wrap gap-2">
+              <h3 class="font-semibold text-gray-900">{{ gift.name }}</h3>
+              {% if gift.is_received %}
+              <span class="inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <i class="fa-solid fa-check mr-1"></i>{% trans "Already received" %}
+              </span>
+              {% endif %}
+              {% if gift.price %}
+              <span class="text-sm font-medium text-gray-500">€{{ gift.price }}</span>
+              {% endif %}
+              {% if gift.url %}
+              <a href="{{ gift.url }}" target="_blank" rel="noopener noreferrer"
+                 class="text-indigo-400 hover:text-indigo-600 text-sm" title="{% trans "Open link" %}">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+              {% endif %}
+            </div>
+            {% if gift.description %}
+            <p class="text-sm text-gray-500 mt-1">{{ gift.description }}</p>
+            {% endif %}
+          </div>
+
+          <!-- Edit/delete if I added it -->
+          {% if gift.added_by == request.user %}
+          <div class="flex items-center gap-1 shrink-0">
+            <a href="{% url 'gifts:edit_gift' gift.pk %}"
+               class="p-2 rounded-lg text-gray-400 hover:bg-gray-50 hover:text-indigo-600 text-sm transition-colors" title="{% trans "Edit" %}">
+              <i class="fa-solid fa-pen"></i>
+            </a>
+            {% with owner_name=target_user.display_name|escapejs %}
+            <form method="POST" action="{% url 'gifts:delete_gift' gift.pk %}"
+                  onsubmit="return confirm('{% blocktrans with name=owner_name %}Remove this surprise from {{ name }}\'s wishlist?{% endblocktrans %}')">
+              {% csrf_token %}
+              <button type="submit"
+                class="p-2 rounded-lg text-gray-400 hover:bg-red-50 hover:text-red-500 text-sm transition-colors" title="{% trans "Remove" %}">
+                <i class="fa-solid fa-trash"></i>
+              </button>
+            </form>
+            {% endwith %}
+          </div>
+          {% endif %}
+        </div>
+
+        <!-- Registration section -->
+        <div class="mt-3 pt-3 border-t border-gray-100">
+          {% include "gifts/partials/registration_section.html" with gift=gift registrations=gift.registrations.all i_am_registered=gift.i_am_registered %}
+        </div>
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+  {% else %}
+  <div class="text-center py-20 text-gray-400">
+    <i class="fa-solid fa-gift text-5xl mb-4"></i>
+    <p class="text-lg font-medium text-gray-500">{% trans "No gifts on this wishlist yet" %}</p>
+    <p class="text-sm mt-1">{% blocktrans with name=target_display %}Add a surprise gift above, or wait for {{ name }} to fill their list!{% endblocktrans %}</p>
+  </div>
+  {% endif %}
+
+</div>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends "layouts/app.html" %}
+{% load i18n %}
+{% block title %}{% trans "Members" %}{% endblock %}
+{% block content %}
+<div class="max-w-3xl mx-auto">
+
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-gray-900">{% trans "Members" %}</h1>
+      {% if request.workspace %}
+      <p class="text-sm text-gray-500 mt-0.5">{{ request.workspace.name }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- My profile in this group -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6">
+    <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-4">{% trans "Your profile in this group" %}</h2>
+    <form method="POST" class="space-y-3">
+      {% csrf_token %}
+      <input type="hidden" name="action" value="set_profile">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Nickname" %}</label>
+          <input type="text" name="nickname"
+                 value="{{ my_nickname }}"
+                 placeholder="{% trans "e.g. Dad, Grandma, Uncle Jan…" %}"
+                 maxlength="100"
+                 class="input">
+          <p class="text-xs text-gray-400 mt-1">{% trans "How others see you in this group." %}</p>
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Birthday" %}</label>
+          <input type="date" name="birthday"
+                 value="{{ my_birthday|date:'Y-m-d' }}"
+                 class="input">
+          <p class="text-xs text-gray-400 mt-1">{% trans "Helps the group remember when to gift you." %}</p>
+        </div>
+      </div>
+      <div>
+        <button type="submit" class="btn-primary text-sm">{% trans "Save profile" %}</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Members -->
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 mb-6">
+    <div class="p-5 border-b border-gray-100">
+      <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">
+        {% trans "Members" %} <span class="text-gray-400 font-normal">({{ memberships|length }})</span>
+      </h2>
+    </div>
+    <ul class="divide-y divide-gray-100">
+      {% for m in memberships %}
+      <li class="flex items-center gap-3 px-5 py-3.5">
+        {% if m.user.avatar %}
+        <img src="{{ m.user.avatar }}" class="w-9 h-9 rounded-full object-cover shrink-0" alt="">
+        {% else %}
+        <div class="w-9 h-9 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-700 font-semibold text-sm shrink-0">
+          {{ m.user.initials }}
+        </div>
+        {% endif %}
+
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-medium text-gray-900 text-sm">
+              {% if m.user.workspace_nickname %}{{ m.user.workspace_nickname }}{% else %}{{ m.user.display_name }}{% endif %}
+            </span>
+            {% if m.user.workspace_nickname %}
+            <span class="text-xs text-gray-400">({{ m.user.display_name }})</span>
+            {% endif %}
+            {% if m.role == "owner" %}
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-amber-100 text-amber-700">{% trans "owner" %}</span>
+            {% elif m.role == "admin" %}
+            <span class="inline-flex items-center px-1.5 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-700">{% trans "admin" %}</span>
+            {% endif %}
+            {% if m.user == request.user %}
+            <span class="text-xs text-gray-400 italic">{% trans "you" %}</span>
+            {% endif %}
+          </div>
+          <div class="flex items-center gap-3 mt-0.5">
+            <p class="text-xs text-gray-400 truncate">{{ m.user.email }}</p>
+            {% if m.user.birthday %}
+            <span class="text-xs text-pink-500 shrink-0">
+              <i class="fa-solid fa-cake-candles mr-0.5"></i>{{ m.user.birthday|date:"j F" }}
+            </span>
+            {% endif %}
+          </div>
+        </div>
+
+        {% if m.user != request.user %}
+        <a href="{% url 'gifts:user_list' m.user.pk %}"
+           class="text-xs text-indigo-500 hover:text-indigo-700 shrink-0 transition-colors">
+          <i class="fa-solid fa-gift mr-1"></i>{% trans "Wishes" %}
+        </a>
+        {% endif %}
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <!-- Invitations -->
+  {% if can_invite %}
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200">
+    <div class="p-5 border-b border-gray-100">
+      <h2 class="text-sm font-semibold text-gray-500 uppercase tracking-wide">{% trans "Invite someone" %}</h2>
+    </div>
+    <div class="p-5">
+      <form method="POST">
+        {% csrf_token %}
+        <input type="hidden" name="action" value="invite">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-3">
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Email" %} *</label>
+            <input type="email" name="email" placeholder="friend@example.com" required class="input">
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Nickname" %} <span class="text-gray-400 font-normal">({% trans "optional" %})</span></label>
+            <input type="text" name="invite_nickname" placeholder="{% trans "e.g. Aunt Marie" %}" maxlength="100" class="input">
+          </div>
+        </div>
+        <button type="submit" class="btn-primary text-sm">
+          <i class="fa-solid fa-paper-plane mr-1"></i>{% trans "Send invite" %}
+        </button>
+      </form>
+
+      {% if pending_invitations %}
+      <div class="mt-5">
+        <p class="text-xs font-semibold text-gray-400 uppercase tracking-wide mb-2">{% trans "Pending invitations" %}</p>
+        <ul class="space-y-2">
+          {% for inv in pending_invitations %}
+          <li class="flex items-center justify-between gap-3 text-sm">
+            <div class="flex items-center gap-2 min-w-0">
+              <i class="fa-solid fa-envelope text-gray-300 shrink-0"></i>
+              <span class="text-gray-700 truncate">{{ inv.email }}</span>
+              {% if inv.preset_nickname %}
+              <span class="text-xs text-indigo-500">{% blocktrans with nick=inv.preset_nickname %}as "{{ nick }}"{% endblocktrans %}</span>
+              {% endif %}
+              {% if inv.is_expired %}
+              <span class="text-xs text-red-400">{% trans "expired" %}</span>
+              {% else %}
+              <span class="text-xs text-gray-400">{% blocktrans with date=inv.expires_at|date:"j M" %}expires {{ date }}{% endblocktrans %}</span>
+              {% endif %}
+            </div>
+            <form method="POST" class="shrink-0">
+              {% csrf_token %}
+              <input type="hidden" name="action" value="cancel_invite">
+              <input type="hidden" name="invitation_id" value="{{ inv.pk }}">
+              <button type="submit" class="text-xs text-gray-400 hover:text-red-500 transition-colors">
+                <i class="fa-solid fa-xmark"></i> {% trans "Cancel" %}
+              </button>
+            </form>
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- New Group -->
+  <div class="mt-6 pt-6 border-t border-gray-200 flex justify-center">
+    <a href="{% url 'workspace_create' %}" class="btn-secondary text-sm">
+      <i class="fa-solid fa-plus mr-2"></i>{% trans "New Group" %}
+    </a>
+  </div>
+
+</div>
+{% endblock %}

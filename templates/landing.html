@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Giftarium — Gift wishlists for your people{% endblock %}
+
+{% block body %}
+<div class="min-h-full bg-gray-50">
+
+  <!-- Nav -->
+  <nav class="bg-white border-b border-gray-200">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
+      <div class="flex items-center gap-3">
+        <div class="h-9 w-9 rounded-lg flex items-center justify-center overflow-hidden flex-shrink-0" style="background:#1a1a1a;">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="28" height="28" aria-hidden="true">
+            <rect x="4" y="17" width="24" height="12" rx="1" fill="#c0392b"/>
+            <rect x="3" y="12" width="26" height="6" rx="1" fill="#e74c3c"/>
+            <rect x="14" y="12" width="4" height="17" fill="#f1c40f"/>
+            <rect x="3" y="14" width="26" height="2" fill="#f1c40f"/>
+            <ellipse cx="12" cy="10" rx="5" ry="3.5" fill="#2ecc40" transform="rotate(-20 12 10)"/>
+            <ellipse cx="20" cy="10" rx="5" ry="3.5" fill="#27ae60" transform="rotate(20 20 10)"/>
+            <circle cx="16" cy="11" r="2.5" fill="#f1c40f"/>
+          </svg>
+        </div>
+        <span class="text-lg font-bold text-gray-900">Giftarium</span>
+      </div>
+      <div class="flex items-center gap-4">
+        <a href="/accounts/login/" class="text-sm font-medium text-gray-600 hover:text-gray-900">Sign in</a>
+        <a href="/accounts/signup/" class="btn-primary text-sm">Get started</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-20 pb-16 text-center">
+    <h1 class="text-4xl sm:text-5xl font-extrabold text-gray-900 tracking-tight">
+      Gift wishlists your<br class="hidden sm:block"> whole circle will love
+    </h1>
+    <p class="mt-6 text-lg text-gray-500 max-w-2xl mx-auto">
+      Add gifts you'd like, share your list with family and friends, and let them quietly register for what they'll get you — without spoiling the surprise.
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
+      <a href="/accounts/signup/" class="btn-primary px-6 py-3 text-base">
+        <i class="fa-solid fa-gift mr-2"></i>Create your wishlist
+      </a>
+      <a href="/accounts/login/" class="btn-secondary px-6 py-3 text-base">Sign in</a>
+    </div>
+  </div>
+
+  <!-- Features -->
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
+    <div class="grid sm:grid-cols-3 gap-8">
+
+      <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <div class="h-10 w-10 rounded-lg bg-primary-100 flex items-center justify-center mb-4">
+          <i class="fa-solid fa-list-check text-primary-600 text-lg"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">Your personal wishlist</h3>
+        <p class="text-sm text-gray-500">Add gifts you'd like — with a name, link, and price. Update it any time; your people always see the latest version.</p>
+      </div>
+
+      <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <div class="h-10 w-10 rounded-lg bg-green-100 flex items-center justify-center mb-4">
+          <i class="fa-solid fa-users text-green-600 text-lg"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">Share with groups</h3>
+        <p class="text-sm text-gray-500">Create separate groups for family, friends, or colleagues. Each group sees only the lists you choose to share with them.</p>
+      </div>
+
+      <div class="bg-white rounded-xl border border-gray-200 shadow-sm p-6">
+        <div class="h-10 w-10 rounded-lg bg-purple-100 flex items-center justify-center mb-4">
+          <i class="fa-solid fa-eye-slash text-purple-600 text-lg"></i>
+        </div>
+        <h3 class="font-semibold text-gray-900 mb-2">No spoilers</h3>
+        <p class="text-sm text-gray-500">When someone registers for a gift, the recipient sees it's covered — but never finds out who's getting it for them.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="border-t border-gray-200 py-8 text-center text-sm text-gray-400">
+    &copy; {% now "Y" %} Giftarium
+  </div>
+
+</div>
+{% endblock %}

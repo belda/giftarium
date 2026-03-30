@@ -1,0 +1,21 @@
+{% load i18n %}
+{% if saved %}
+<p class="mb-3 text-sm text-green-600 font-medium">{% trans "Saved." %}</p>
+{% endif %}
+<form hx-post="{% url 'settings_panel_gift_settings' %}"
+      hx-target="#panel-gift_settings"
+      hx-swap="innerHTML">
+  {% csrf_token %}
+  <div class="flex items-start gap-x-3">
+    <div class="mt-1">{{ form.members_can_invite }}</div>
+    <div>
+      <label for="{{ form.members_can_invite.id_for_label }}" class="text-sm font-medium text-gray-900">
+        {{ form.members_can_invite.label }}
+      </label>
+      <p class="text-sm text-gray-500">{{ form.members_can_invite.help_text }}</p>
+    </div>
+  </div>
+  <div class="mt-4 flex justify-end">
+    <button type="submit" class="btn-primary">{% trans "Save" %}</button>
+  </div>
+</form>

@@ -1,0 +1,13 @@
+# Extend docker-compose.yml for local development with hot reload.
+# Usage: docker compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  web:
+    volumes:
+      - .:/app
+    environment:
+      - DJANGO_SETTINGS_MODULE=config.settings.development
+      - DEBUG=True
+    command: python manage.py runserver 0.0.0.0:8000
+    ports:
+      - "8000:8000"

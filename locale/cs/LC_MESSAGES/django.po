@@ -1,0 +1,455 @@
+# Czech translations for Giftarium.
+# Copyright (C) 2026 Giftarium
+#
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: cs\n"
+"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1 : (n % 1 != 0) ? 2 : 3;\n"
+
+# settings.py LANGUAGES
+msgid "Czech"
+msgstr "Čeština"
+
+msgid "English"
+msgstr "Angličtina"
+
+# apps.py nav items
+msgid "My Wishes"
+msgstr "Má přání"
+
+msgid "Others' Wishes"
+msgstr "Přání ostatních"
+
+msgid "Members"
+msgstr "Členové"
+
+# forms.py labels
+msgid "Gift name"
+msgstr "Název dárku"
+
+msgid "Details"
+msgstr "Podrobnosti"
+
+msgid "Link"
+msgstr "Odkaz"
+
+msgid "Approximate price (€)"
+msgstr "Přibližná cena (€)"
+
+# forms.py placeholders
+msgid "What do you wish for?"
+msgstr "Co si přeješ?"
+
+msgid "Optional details — color, size, brand…"
+msgstr "Volitelné podrobnosti — barva, velikost, značka…"
+
+# views.py flash messages
+msgid "Create or join a group to see wishlists."
+msgstr "Vytvořte nebo se připojte ke skupině pro zobrazení přání."
+
+msgid "Please enter an email address."
+msgstr "Zadejte prosím e-mailovou adresu."
+
+#, python-format
+msgid "%(email)s is already a member of this group."
+msgstr "%(email)s je již členem této skupiny."
+
+#, python-format
+msgid "You've been invited to %(workspace)s on %(app)s"
+msgstr "Byli jste pozváni do skupiny %(workspace)s v aplikaci %(app)s"
+
+#, python-format
+msgid "%(user)s has invited you to join \"%(workspace)s\" on %(app)s.\n\nAccept here: %(url)s"
+msgstr "%(user)s vás zve do skupiny \"%(workspace)s\" v aplikaci %(app)s.\n\nPřijmout zde: %(url)s"
+
+#, python-format
+msgid "Invitation sent to %(email)s!"
+msgstr "Pozvánka odeslána na %(email)s!"
+
+msgid "Gift added to your wishlist!"
+msgstr "Dárek přidán do vašeho seznamu přání!"
+
+msgid "Gift updated!"
+msgstr "Dárek byl upraven!"
+
+msgid "Gift removed."
+msgstr "Dárek byl odstraněn."
+
+msgid "This user is not in your current group."
+msgstr "Tento uživatel není ve vaší aktuální skupině."
+
+#, python-format
+msgid "Surprise gift added to %(name)s's wishlist!"
+msgstr "Dárek překvapení přidán do seznamu přání uživatele %(name)s!"
+
+msgid "Gift name is required."
+msgstr "Název dárku je povinný."
+
+msgid "Create or join a group first."
+msgstr "Nejprve vytvořte nebo se připojte ke skupině."
+
+msgid "Invalid date format."
+msgstr "Neplatný formát data."
+
+msgid "Profile updated!"
+msgstr "Profil byl aktualizován!"
+
+msgid "Invitation cancelled."
+msgstr "Pozvánka byla zrušena."
+
+#, python-format
+msgid "You're already a member of %(name)s."
+msgstr "Již jste členem skupiny %(name)s."
+
+#, python-format
+msgid "Welcome to %(name)s! You can now see everyone's wishlists."
+msgstr "Vítejte ve skupině %(name)s! Nyní vidíte přání všech členů."
+
+# templates/gifts/my_list.html
+msgid "My Wishlist"
+msgstr "Moje přání"
+
+msgid "Share"
+msgstr "Sdílet"
+
+msgid "All Members"
+msgstr "Všichni členové"
+
+#, python-format
+msgid "Invite sent to %(email)s!"
+msgstr "Pozvánka odeslána na %(email)s!"
+
+msgid "Or share this link directly:"
+msgstr "Nebo sdílejte tento odkaz přímo:"
+
+msgid "Copy"
+msgstr "Kopírovat"
+
+msgid "Copied!"
+msgstr "Zkopírováno!"
+
+msgid "Share your wishlist"
+msgstr "Sdílet seznam přání"
+
+#, python-format
+msgid "Invite people to join <strong>%(name)s</strong>"
+msgstr "Pozvěte ostatní do skupiny <strong>%(name)s</strong>"
+
+msgid "Copy link"
+msgstr "Kopírovat odkaz"
+
+msgid "Send email"
+msgstr "Poslat e-mail"
+
+#, python-format
+msgid "Anyone with this link can join <strong>%(name)s</strong> and see your wishlist."
+msgstr "Kdokoli s tímto odkazem se může připojit ke skupině <strong>%(name)s</strong> a vidět vaše přání."
+
+msgid "Send a personal invite. You can also pre-set their nickname so others know who they are."
+msgstr "Pošlete osobní pozvánku. Můžete také přednastavit přezdívku, aby ostatní věděli, kdo to je."
+
+msgid "Email"
+msgstr "E-mail"
+
+msgid "Nickname"
+msgstr "Přezdívka"
+
+msgid "optional"
+msgstr "volitelně"
+
+msgid "e.g. Mom, Best Friend…"
+msgstr "např. Máma, Nejlepší kamarád…"
+
+msgid "Send invite"
+msgstr "Poslat pozvánku"
+
+msgid "Someone has a surprise for you!"
+msgstr "Někdo pro tebe má překvapení!"
+
+#, python-format
+msgid "%(count)s surprises are coming your way!"
+msgstr "%(count)s překvapení je na cestě!"
+
+msgid "Someone from your group has secretly added a gift to your list."
+msgstr "Někdo ze skupiny tajně přidal dárek do tvého seznamu."
+
+msgid "How Giftarium works"
+msgstr "Jak funguje Giftarium"
+
+msgid "<strong>Add gifts</strong> you'd like to receive — name, description, link, and approximate price."
+msgstr "<strong>Přidejte dárky</strong>, které chcete dostat — název, popis, odkaz a přibližnou cenu."
+
+msgid "<strong>Invite your family or friends</strong> using the Share button above — each group is called a workspace."
+msgstr "<strong>Pozvěte rodinu nebo přátele</strong> pomocí tlačítka Sdílet výše — každá skupina se nazývá pracovní prostor."
+
+msgid "<strong>Browse others' wishlists</strong> and register for gifts you plan to buy — they won't see who, only that someone is on it."
+msgstr "<strong>Prohlížejte přání ostatních</strong> a registrujte se ke dárkům, které chcete koupit — neuvidí kdo, jen že někdo je zapsán."
+
+msgid "You can hide specific gifts from certain groups, and people can secretly add surprise gifts to your list."
+msgstr "Můžete skrýt konkrétní dárky před určitými skupinami a ostatní mohou tajně přidat překvapení do vašeho seznamu."
+
+msgid "Add a gift to your wishlist"
+msgstr "Přidat dárek do seznamu přání"
+
+msgid "Add gift"
+msgstr "Přidat dárek"
+
+msgid "Received"
+msgstr "Přijato"
+
+msgid "Open link"
+msgstr "Otevřít odkaz"
+
+msgid "Mark as not received"
+msgstr "Označit jako nepřijaté"
+
+msgid "Mark as received"
+msgstr "Označit jako přijaté"
+
+msgid "Edit"
+msgstr "Upravit"
+
+msgid "1 person is getting this for you"
+msgstr "1 člověk ti to pořizuje"
+
+#, python-format
+msgid "%(count)s people are chipping in on this"
+msgstr "%(count)s lidí se na tom skládá"
+
+#, python-format
+msgid "Remove %(name)s from your wishlist?"
+msgstr "Odebrat %(name)s ze seznamu přání?"
+
+msgid "Delete"
+msgstr "Smazat"
+
+msgid "Visible in:"
+msgstr "Viditelné v:"
+
+#, python-format
+msgid "Click to show this gift in %(name)s"
+msgstr "Kliknutím zobrazit tento dárek ve skupině %(name)s"
+
+#, python-format
+msgid "Click to hide this gift from %(name)s"
+msgstr "Kliknutím skrýt tento dárek ze skupiny %(name)s"
+
+msgid "Your wishlist is empty"
+msgstr "Váš seznam přání je prázdný"
+
+msgid "Add some gifts above so your family and friends know what to get you!"
+msgstr "Přidejte dárky výše, aby vaše rodina a přátelé věděli, co vám pořídit!"
+
+# templates/gifts/index.html
+msgid "Wishlists"
+msgstr "Přání"
+
+msgid "Nothing on the wishlist yet"
+msgstr "Zatím žádná přání"
+
+msgid "1 gift on their wishlist"
+msgstr "1 přání na seznamu"
+
+#, python-format
+msgid "%(count)s gifts on their wishlist"
+msgstr "%(count)s přání na seznamu"
+
+msgid "No other members yet"
+msgstr "Zatím žádní další členové"
+
+msgid "Once you invite someone and they join, their wishlist appears here. You can then see what they want and register for gifts — they'll know someone is on it, but not who."
+msgstr "Jakmile pozvete někoho a on se připojí, jeho přání se zobrazí zde. Poté uvidíte, co chtějí, a můžete se zapsat ke dárkům — uvidí, že někdo je zapsán, ale ne kdo."
+
+msgid "Invite someone"
+msgstr "Pozvat někoho"
+
+msgid "Go to <strong>Members</strong> to send an email invite or copy a join link."
+msgstr "Přejděte do sekce <strong>Členové</strong> a pošlete e-mailovou pozvánku nebo zkopírujte odkaz pro připojení."
+
+# templates/gifts/user_list.html
+#, python-format
+msgid "%(name)s's Wishlist"
+msgstr "Přání uživatele %(name)s"
+
+msgid "Back"
+msgstr "Zpět"
+
+msgid "Add a surprise gift"
+msgstr "Přidat překvapení"
+
+#, python-format
+msgid "%(name)s will only see a placeholder — they won't know what it is!"
+msgstr "%(name)s uvidí jen zástupný symbol — nebude vědět, co to je!"
+
+msgid "Add Surprise"
+msgstr "Přidat překvapení"
+
+msgid "Cancel"
+msgstr "Zrušit"
+
+msgid "Surprise added by you"
+msgstr "Překvapení přidáno tebou"
+
+#, python-format
+msgid "Surprise from %(name)s"
+msgstr "Překvapení od %(name)s"
+
+msgid "Already received"
+msgstr "Již přijato"
+
+msgid "Remove"
+msgstr "Odebrat"
+
+#, python-format
+msgid "Remove this surprise from %(name)s\\'s wishlist?"
+msgstr "Odebrat toto překvapení ze seznamu přání uživatele %(name)s?"
+
+msgid "No gifts on this wishlist yet"
+msgstr "Zatím žádné dárky na tomto seznamu"
+
+#, python-format
+msgid "Add a surprise gift above, or wait for %(name)s to fill their list!"
+msgstr "Přidejte překvapení výše nebo počkejte, až %(name)s doplní svůj seznam!"
+
+# templates/gifts/groups.html
+msgid "Your profile in this group"
+msgstr "Váš profil v této skupině"
+
+msgid "e.g. Dad, Grandma, Uncle Jan…"
+msgstr "např. Táta, Babička, Strýc Jan…"
+
+msgid "How others see you in this group."
+msgstr "Jak vás ostatní vidí v této skupině."
+
+msgid "Birthday"
+msgstr "Narozeniny"
+
+msgid "Helps the group remember when to gift you."
+msgstr "Pomáhá skupině pamatovat si, kdy vám dát dárky."
+
+msgid "Save profile"
+msgstr "Uložit profil"
+
+msgid "Wishes"
+msgstr "Přání"
+
+msgid "owner"
+msgstr "vlastník"
+
+msgid "admin"
+msgstr "správce"
+
+msgid "you"
+msgstr "vy"
+
+msgid "e.g. Aunt Marie"
+msgstr "např. Teta Marie"
+
+msgid "Pending invitations"
+msgstr "Čekající pozvánky"
+
+#, python-format
+msgid "as \"%(nick)s\""
+msgstr "jako \u201e%(nick)s\u201c"
+
+msgid "expired"
+msgstr "vypršela"
+
+#, python-format
+msgid "expires %(date)s"
+msgstr "vyprší %(date)s"
+
+msgid "New Group"
+msgstr "Nová skupina"
+
+# templates/gifts/edit_gift.html
+msgid "Edit Gift"
+msgstr "Upravit dárek"
+
+msgid "Save changes"
+msgstr "Uložit změny"
+
+# templates/gifts/partials/registration_section.html
+msgid "Unregister"
+msgstr "Odhlásit se"
+
+msgid "Chip in"
+msgstr "Přidat se"
+
+msgid "I'll get this"
+msgstr "Já to pořídím"
+
+# templates/components/workspace_switcher.html
+msgid "Select group"
+msgstr "Vybrat skupinu"
+
+msgid "Switch group"
+msgstr "Přepnout skupinu"
+
+msgid "New group"
+msgstr "Nová skupina"
+
+msgid "Group settings"
+msgstr "Nastavení skupiny"
+
+msgid "Profile settings"
+msgstr "Nastavení profilu"
+
+msgid "Sign out"
+msgstr "Odhlásit se"
+
+# templates/components/sidebar.html
+msgid "Expand sidebar"
+msgstr "Rozbalit postranní panel"
+
+msgid "Collapse sidebar"
+msgstr "Sbalit postranní panel"
+
+# templates/workspaces/create.html
+msgid "Create Group"
+msgstr "Vytvořit skupinu"
+
+msgid "Create a new group"
+msgstr "Vytvořit novou skupinu"
+
+msgid "Groups let you share wishlists with different sets of people."
+msgstr "Skupiny umožňují sdílet přání s různými lidmi."
+
+msgid "Group name"
+msgstr "Název skupiny"
+
+msgid "Create group"
+msgstr "Vytvořit skupinu"
+
+# templates/workspaces/settings.html
+msgid "Group Settings"
+msgstr "Nastavení skupiny"
+
+msgid "Manage your group details."
+msgstr "Spravujte podrobnosti vaší skupiny."
+
+msgid "Save"
+msgstr "Uložit"
+
+msgid "Name:"
+msgstr "Název:"
+
+msgid "Invite People"
+msgstr "Pozvat lidi"
+
+msgid "Invite people by email address."
+msgstr "Pozvěte lidi pomocí e-mailové adresy."
+
+msgid "Pending Invitations"
+msgstr "Čekající pozvánky"
+
+msgid "API Keys"
+msgstr "API klíče"
+
+msgid "Keys authenticate requests to the REST API on behalf of this group."
+msgstr "Klíče ověřují požadavky na REST API jménem této skupiny."
+
+msgid "Create key"
+msgstr "Vytvořit klíč"

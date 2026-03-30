@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block body %}
+<div class="min-h-full flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="flex justify-center">
+      <div class="h-12 w-12 rounded-xl flex items-center justify-center overflow-hidden" style="background:#1a1a1a;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="38" height="38" aria-hidden="true">
+          <!-- Box body -->
+          <rect x="4" y="17" width="24" height="12" rx="1" fill="#c0392b"/>
+          <!-- Box lid -->
+          <rect x="3" y="12" width="26" height="6" rx="1" fill="#e74c3c"/>
+          <!-- Ribbon vertical -->
+          <rect x="14" y="12" width="4" height="17" fill="#f1c40f"/>
+          <!-- Ribbon horizontal on lid -->
+          <rect x="3" y="14" width="26" height="2" fill="#f1c40f"/>
+          <!-- Bow left loop -->
+          <ellipse cx="12" cy="10" rx="5" ry="3.5" fill="#2ecc40" transform="rotate(-20 12 10)"/>
+          <!-- Bow right loop -->
+          <ellipse cx="20" cy="10" rx="5" ry="3.5" fill="#27ae60" transform="rotate(20 20 10)"/>
+          <!-- Bow center knot -->
+          <circle cx="16" cy="11" r="2.5" fill="#f1c40f"/>
+        </svg>
+      </div>
+    </div>
+    <h2 class="mt-6 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      {% block auth_title %}Sign in to your account{% endblock %}
+    </h2>
+    <p class="mt-2 text-center text-sm text-gray-600">
+      {% block auth_subtitle %}{% endblock %}
+    </p>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-[480px]">
+    <div class="bg-white px-6 py-12 shadow sm:rounded-lg sm:px-12">
+      {% include "components/messages.html" %}
+      {% block auth_content %}{% endblock %}
+    </div>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,55 @@
+{% extends "layouts/app.html" %}
+{% load i18n %}
+{% block title %}{% trans "Edit Gift" %}{% endblock %}
+{% block content %}
+<div class="max-w-lg mx-auto">
+
+  <div class="flex items-center gap-3 mb-6">
+    {% if gift.owner == request.user %}
+    <a href="{% url 'gifts:my_list' %}" class="text-gray-400 hover:text-gray-600 transition-colors">
+      <i class="fa-solid fa-arrow-left"></i>
+    </a>
+    {% else %}
+    <a href="{% url 'gifts:user_list' user_pk=gift.owner.pk %}" class="text-gray-400 hover:text-gray-600 transition-colors">
+      <i class="fa-solid fa-arrow-left"></i>
+    </a>
+    {% endif %}
+    <h1 class="text-2xl font-bold text-gray-900">{% trans "Edit Gift" %}</h1>
+  </div>
+
+  <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+    <form method="POST">
+      {% csrf_token %}
+      <div class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Gift name" %} *</label>
+          {{ form.name }}
+          {% if form.name.errors %}<p class="text-red-500 text-xs mt-1">{{ form.name.errors.0 }}</p>{% endif %}
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Details" %}</label>
+          {{ form.description }}
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Link" %}</label>
+          {{ form.url }}
+          {% if form.url.errors %}<p class="text-red-500 text-xs mt-1">{{ form.url.errors.0 }}</p>{% endif %}
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Approximate price (€)" %}</label>
+          {{ form.price }}
+        </div>
+      </div>
+      <div class="mt-5 flex gap-2">
+        <button type="submit" class="btn-primary">{% trans "Save changes" %}</button>
+        {% if gift.owner == request.user %}
+        <a href="{% url 'gifts:my_list' %}" class="btn-secondary">{% trans "Cancel" %}</a>
+        {% else %}
+        <a href="{% url 'gifts:user_list' user_pk=gift.owner.pk %}" class="btn-secondary">{% trans "Cancel" %}</a>
+        {% endif %}
+      </div>
+    </form>
+  </div>
+
+</div>
+{% endblock %}

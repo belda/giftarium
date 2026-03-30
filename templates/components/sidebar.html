@@ -1,0 +1,61 @@
+{% load i18n %}
+<!-- Sidebar -->
+<aside
+  :class="{
+    'translate-x-0': mobileSidebarOpen,
+    '-translate-x-full': !mobileSidebarOpen,
+    'lg:w-16': sidebarCollapsed,
+    'lg:w-64': !sidebarCollapsed
+  }"
+  class="fixed inset-y-0 left-0 z-50 w-64 flex flex-col bg-gray-900
+         transition-all duration-300 ease-in-out
+         lg:relative lg:translate-x-0 lg:flex lg:shrink-0">
+
+  <!-- Header: logo + name + hamburger toggle -->
+  <div class="flex h-16 shrink-0 items-center justify-between border-b border-gray-700 px-3">
+
+    <!-- Logo + name (hidden when desktop-collapsed) -->
+    <div class="flex items-center gap-x-3 min-w-0"
+         x-show="!sidebarCollapsed" x-cloak>
+      {% include "components/app_logo.html" %}
+      <span class="text-white font-semibold text-sm truncate">{{ APP_NAME }}</span>
+    </div>
+
+    <!-- Hamburger: desktop → toggle collapse; mobile → close drawer -->
+    <button class="hidden lg:flex items-center justify-center h-8 w-8 rounded-md
+                   text-gray-400 hover:text-white hover:bg-gray-800 transition-colors shrink-0"
+            @click="toggleDesktop()"
+            :title="sidebarCollapsed ? '{% trans "Expand sidebar" %}' : '{% trans "Collapse sidebar" %}'">
+      <i class="fa-solid fa-bars fa-fw"></i>
+    </button>
+    <button class="lg:hidden flex items-center justify-center h-8 w-8 rounded-md
+                   text-gray-400 hover:text-white hover:bg-gray-800 transition-colors shrink-0"
+            @click="mobileSidebarOpen = false">
+      <i class="fa-solid fa-bars fa-fw"></i>
+    </button>
+
+  </div>
+
+  <!-- Navigation -->
+  <nav class="flex flex-1 flex-col overflow-y-auto py-3"
+       :class="sidebarCollapsed ? 'px-2' : 'px-3'">
+    <ul role="list" class="flex flex-1 flex-col gap-y-1">
+
+      <!-- Main nav items (registered by WebAppConfig subclasses) -->
+      <li>
+        <ul role="list" :class="sidebarCollapsed ? 'space-y-2' : 'space-y-1'">
+          {% for item in nav_items %}
+            {% include "components/nav_item.html" with url=item.url label=item.label icon=item.icon %}
+          {% endfor %}
+        </ul>
+      </li>
+
+      <li class="mt-auto"></li>
+    </ul>
+  </nav>
+
+  <!-- Workspace switcher -->
+  <div class="border-t border-gray-700 px-3 py-3">
+    {% include "components/workspace_switcher.html" %}
+  </div>
+</aside>
