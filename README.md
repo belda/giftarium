@@ -24,7 +24,7 @@ Self-hostable. Docker deploy in under 5 minutes.
 
 ```bash
 # 1. Clone and configure
-git clone https://github.com/your-org/giftarium.git
+git clone https://github.com/belda/giftarium.git
 cd giftarium
 cp .env.example .env
 ```
