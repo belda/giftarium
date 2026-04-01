@@ -18,8 +18,8 @@ class GiftsConfig(WebAppConfig):
     workspace_settings_panels = [
         WorkspaceSettingsPanel(
             id="gift_settings",
-            title=_("Permissions"),
-            description=_("Control who can invite new people to this group."),
+            title=_("Other Settings"),
+            description=_("Currency and permissions for this group."),
             template="gifts/panels/workspace_settings.html",
             view_func=workspace_settings_panel_view,
             admin_only=True,

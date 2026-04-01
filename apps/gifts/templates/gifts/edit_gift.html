@@ -36,7 +36,7 @@
           {% if form.url.errors %}<p class="text-red-500 text-xs mt-1">{{ form.url.errors.0 }}</p>{% endif %}
         </div>
         <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Approximate price (€)" %}</label>
+          <label class="block text-sm font-medium text-gray-700 mb-1">{% blocktrans with currency=ws_settings.currency %}Approximate price ({{ currency }}){% endblocktrans %}</label>
           {{ form.price }}
         </div>
       </div>

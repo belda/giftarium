@@ -5,6 +5,10 @@ from django.conf import settings
 from webapptemplate.apps.workspaces.models import Workspace
 
 
+def _default_currency():
+    return getattr(settings, "DEFAULT_CURRENCY", "CZK")
+
+
 class Gift(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -128,6 +132,12 @@ class WorkspaceSettings(models.Model):
         default=True,
         verbose_name="Members can invite",
         help_text="Allow regular members (not just admins) to invite new people.",
+    )
+    currency = models.CharField(
+        max_length=10,
+        default=_default_currency,
+        verbose_name="Currency",
+        help_text="Currency symbol shown next to prices (e.g. CZK, EUR, USD).",
     )
 
     class Meta:

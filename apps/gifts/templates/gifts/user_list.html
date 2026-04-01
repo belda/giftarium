@@ -55,7 +55,7 @@
             {{ surprise_form.url }}
           </div>
           <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">{% trans "Approximate price (€)" %}</label>
+            <label class="block text-sm font-medium text-gray-700 mb-1">{% blocktrans with currency=ws_settings.currency %}Approximate price ({{ currency }}){% endblocktrans %}</label>
             {{ surprise_form.price }}
           </div>
         </div>
@@ -100,7 +100,7 @@
               </span>
               {% endif %}
               {% if gift.price %}
-              <span class="text-sm font-medium text-gray-500">€{{ gift.price }}</span>
+              <span class="text-sm font-medium text-gray-500">{{ gift.price }} {{ ws_settings.currency }}</span>
               {% endif %}
               {% if gift.url %}
               <a href="{{ gift.url }}" target="_blank" rel="noopener noreferrer"

@@ -32,16 +32,17 @@ class GiftForm(forms.ModelForm):
             "name": _("Gift name"),
             "description": _("Details"),
             "url": _("Link"),
-            "price": _("Approximate price (€)"),
+            "price": _("Approximate price"),
         }
 
 
 class WorkspaceSettingsForm(forms.ModelForm):
     class Meta:
         model = WorkspaceSettings
-        fields = ["members_can_invite"]
+        fields = ["members_can_invite", "currency"]
         widgets = {
             "members_can_invite": forms.CheckboxInput(attrs={"class": "h-4 w-4 rounded border-gray-300 text-indigo-600"}),
+            "currency": forms.TextInput(attrs={"class": "input", "placeholder": "CZK"}),
         }
 
 

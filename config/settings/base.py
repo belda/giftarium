@@ -53,6 +53,8 @@ ADMINS = [("Giftarium Admin", config("ADMIN_EMAIL", default="jakub.belda@gmail.c
 SOCIALACCOUNT_PROVIDERS["google"]["APP"]["client_id"] = config("GOOGLE_CLIENT_ID", default="")
 SOCIALACCOUNT_PROVIDERS["google"]["APP"]["secret"] = config("GOOGLE_CLIENT_SECRET", default="")
 
+DEFAULT_CURRENCY = "CZK"
+
 LOGIN_REDIRECT_URL = "/gifts/mine/"
 
 # Internationalisation

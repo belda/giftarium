@@ -6,13 +6,22 @@
       hx-target="#panel-gift_settings"
       hx-swap="innerHTML">
   {% csrf_token %}
-  <div class="flex items-start gap-x-3">
-    <div class="mt-1">{{ form.members_can_invite }}</div>
+  <div class="space-y-4">
     <div>
-      <label for="{{ form.members_can_invite.id_for_label }}" class="text-sm font-medium text-gray-900">
-        {{ form.members_can_invite.label }}
+      <label for="{{ form.currency.id_for_label }}" class="block text-sm font-medium text-gray-900 mb-1">
+        {{ form.currency.label }}
       </label>
-      <p class="text-sm text-gray-500">{{ form.members_can_invite.help_text }}</p>
+      {{ form.currency }}
+      <p class="mt-1 text-sm text-gray-500">{{ form.currency.help_text }}</p>
+    </div>
+    <div class="flex items-start gap-x-3">
+      <div class="mt-1">{{ form.members_can_invite }}</div>
+      <div>
+        <label for="{{ form.members_can_invite.id_for_label }}" class="text-sm font-medium text-gray-900">
+          {{ form.members_can_invite.label }}
+        </label>
+        <p class="text-sm text-gray-500">{{ form.members_can_invite.help_text }}</p>
+      </div>
     </div>
   </div>
   <div class="mt-4 flex justify-end">

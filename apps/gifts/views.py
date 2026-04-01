@@ -382,7 +382,7 @@ def groups(request):
                     user=request.user, workspace=workspace
                 ).delete()
 
-            profile, _ = UserProfile.objects.get_or_create(user=request.user)
+            profile, created = UserProfile.objects.get_or_create(user=request.user)
             if birthday_str:
                 try:
                     profile.birthday = date.fromisoformat(birthday_str)
@@ -442,7 +442,7 @@ def groups(request):
                 },
                 from_email=django_settings.DEFAULT_FROM_EMAIL,
                 recipient_list=[email],
-                fail_silently=True,
+                fail_silently=False,
             )
             messages.success(request, _("Invitation sent to %(email)s!") % {"email": email})
             return redirect("gifts:groups")
